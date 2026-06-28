@@ -1,0 +1,12 @@
+.feature-card{
+    background:#1e293b;
+    border-radius:20px;
+    padding:30px;
+    height:100%;
+    transition:0.3s;
+}
+
+.feature-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 25px rgba(59,130,246,.3);
+}

@@ -1,0 +1,357 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Todo Manager Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <!-- Hero -->
+    <div class="text-center mb-5">
+        <h1 class="display-2 fw-bold">
+            Organize Your Life 🗺️
+        </h1>
+
+        <p class="lead text-light mt-3">
+            Manage tasks, track progress and stay productive every day.
+        </p>
+
+        <a href="{% url 'todolist' %}" class="btn btn-primary btn-lg mt-3">
+            Open Todo List
+        </a>
+    </div>
+
+    <!-- Statistics -->
+   <!-- Statistics -->
+<div class="row g-4">
+
+    <!-- Weekly Productivity Chart -->
+
+<div class="row mb-5">
+
+    <div class="col-12">
+
+        <div class="feature-card">
+
+            <h3 class="mb-4">
+                📊 Weekly Productivity
+            </h3>
+
+            <div style="height:320px;">
+
+                <canvas id="weeklyChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- Statistics -->
+
+<div class="row g-4">
+
+    <div class="col-md-4">
+        <div class="feature-card text-center">
+            <h1 class="fw-bold">{{ total_tasks }}</h1>
+            <h5>Total Tasks</h5>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="feature-card text-center">
+            <h1 class="fw-bold text-success">{{ completed_tasks }}</h1>
+            <h5>Completed Tasks</h5>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="feature-card text-center">
+            <h1 class="fw-bold text-warning">{{ pending_tasks }}</h1>
+            <h5>Pending Tasks</h5>
+        </div>
+    </div>
+
+</div>
+
+    ...
+
+    </div>
+    </div>
+
+    <!-- Recent Tasks + Quick Actions -->
+    <div class="row mt-5">
+
+        <div class="col-lg-8">
+
+            <div class="feature-card">
+
+                <h3 class="mb-4">📋 Recent Tasks</h3>
+
+                {% for task in recent_tasks %}
+
+                    <div class="d-flex justify-content-between mb-3">
+
+                        <span>{{ task.task }}</span>
+
+                        {% if task.is_completed %}
+                            <span class="badge bg-success">
+                                Completed
+                            </span>
+                        {% else %}
+                            <span class="badge bg-warning text-dark">
+                                Pending
+                            </span>
+                        {% endif %}
+
+                    </div>
+
+                    <hr>
+
+                {% empty %}
+
+                    <p>No tasks available.</p>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-4">
+
+            <div class="feature-card">
+
+                <h3 class="mb-4">⚡ Quick Actions</h3>
+
+                <a href="{% url 'todolist' %}"
+                   class="btn btn-primary w-100 mb-3">
+                    Manage Tasks
+                </a>
+
+                <a href="{% url 'contact' %}"
+                   class="btn btn-outline-light w-100 mb-3">
+                    Contact Us
+                </a>
+
+                <a href="{% url 'about' %}"
+                   class="btn btn-outline-light w-100">
+                    About Project
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Level, Achievement & XP -->
+    <div class="row mt-5">
+
+        <div class="col-md-4">
+
+            <div class="feature-card">
+
+                <h3>🏆 Current Level</h3>
+
+                <h2 class="text-info">
+                    {{ level }}
+                </h2>
+
+                <br>
+
+                <p>XP Progress</p>
+
+                <div class="progress" style="height:25px;">
+
+                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-success"
+                         role="progressbar"
+                         style="width: {{ progress }}%;">
+
+                        {{ progress }}%
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="feature-card text-center">
+
+                <h3>🎖 Achievement</h3>
+
+                <h1 class="display-5 mt-4">
+                    {{ badge }}
+                </h1>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="feature-card text-center">
+
+                <div class="d-flex justify-content-center align-items-center gap-3 mb-2">
+
+                    <span style="font-size:42px;">⭐</span>
+
+                    <span class="display-5 fw-bold text-warning">
+                        {{ total_xp }}
+                    </span>
+
+                </div>
+
+                <h5>Total XP</h5>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Features -->
+    <div class="row mt-5">
+
+        <div class="col-md-4 mb-4">
+            <div class="feature-card text-center">
+                <h3>📝 Add Tasks</h3>
+                <p>Create and manage your daily tasks easily.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="feature-card text-center">
+                <h3>✅ Complete Tasks</h3>
+                <p>Track completed work and measure productivity.</p>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="feature-card text-center">
+                <h3>📈 Stay Productive</h3>
+                <p>Keep all your work organized in one place.</p>
+            </div>
+        </div>
+
+    </div>
+
+       <!-- CTA -->
+    <div class="text-center mt-5">
+
+        <h2>Ready to start?</h2>
+
+        <a href="{% url 'todolist' %}"
+           class="btn btn-success btn-lg mt-3">
+            Manage Tasks
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+const ctx = document.getElementById("weeklyChart");
+
+new Chart(ctx, {
+
+    type: "bar",
+
+    data: {
+
+        labels: {{ week_labels|safe }},
+
+        datasets: [{
+
+            label: "Completed Tasks",
+
+            data: {{ weekly_data|safe }},
+
+            backgroundColor: "#3b82f6",
+
+            borderRadius: 8,
+
+            maxBarThickness: 40
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        plugins: {
+
+            legend: {
+
+                display: false
+
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true,
+
+                ticks: {
+
+                    stepSize: 1,
+
+                    color: "#ffffff"
+
+                },
+
+                grid: {
+
+                    color: "rgba(255,255,255,.1)"
+
+                }
+
+            },
+
+            x: {
+
+                ticks: {
+
+                    color: "#ffffff"
+
+                },
+
+                grid: {
+
+                    display: false
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+</script>
+
+{% endblock %}

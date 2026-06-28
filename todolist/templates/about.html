@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+About Us
+{% endblock %}
+
+{% block content %}
+
+<!-- Banner Image -->
+
+<!-- Banner Image -->
+<div class="container-fluid p-0 mb-5">
+    <img src="{% static 'image/todo_image.png' %}"
+         class="img-fluid w-100 rounded-4 shadow-lg"
+         alt="About Banner">
+</div>
+
+<div class="container py-5">
+
+    <!-- Heading -->
+
+    <!-- Heading -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">
+            About Todo Manager ♨️
+        </h1>
+
+        <p class="lead text-light">
+            Organize your life, increase productivity, and accomplish your goals effortlessly.
+        </p>
+    </div>
+
+    <!-- About Project -->
+    <div class="feature-card mb-5">
+
+        <h2 class="text-primary mb-3">
+            📖 About the Project
+        </h2>
+
+        <p class="text-light">
+            Todo Manager is a modern task management web application built to help
+            users organize daily activities, manage tasks efficiently, and improve
+            productivity. It provides an intuitive interface for creating, updating,
+            completing, and tracking tasks from one dashboard.
+        </p>
+
+    </div>
+
+    <!-- Features -->
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <h2>📝</h2>
+                <h4>Create Tasks</h4>
+                <p class="text-light">
+                    Easily add and organize your daily tasks.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <h2>✅</h2>
+                <h4>Track Progress</h4>
+                <p class="text-light">
+                    Mark tasks as completed and monitor your productivity.
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="feature-card text-center">
+                <h2>🏆</h2>
+                <h4>Reward System</h4>
+                <p class="text-light">
+                    Earn XP by completing tasks and stay motivated.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Technologies -->
+    <div class="feature-card mt-5">
+
+        <h2 class="text-success mb-4">
+            💻 Technologies Used
+        </h2>
+
+        <div class="row text-center">
+
+            <div class="col-md-3">
+                <h1>🐍</h1>
+                <h5>Python</h5>
+            </div>
+
+            <div class="col-md-3">
+                <h1>🎯</h1>
+                <h5>Django</h5>
+            </div>
+
+            <div class="col-md-3">
+                <h1>🗄️</h1>
+                <h5>MySQL</h5>
+            </div>
+
+            <div class="col-md-3">
+                <h1>🎨</h1>
+                <h5>Bootstrap 5</h5>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Developer -->
+    <div class="feature-card mt-5 text-center">
+
+        <h2 class="text-warning mb-4">
+            👨‍💻 Developed By
+        </h2>
+
+        <h3>Ritesh Behera</h3>
+
+        <p class="text-light">
+            Python Full Stack Developer
+        </p>
+
+        <p class="text-light">
+            Passionate about building modern web applications using
+            Django, React, MySQL, and Bootstrap.
+        </p>
+
+        <a href="{% url 'contact' %}" class="btn btn-primary mt-3">
+            Contact Me
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}
