@@ -25,7 +25,13 @@ SECRET_KEY = 'django-insecure-ak9(srt!lh0$w3dee(b09wu$lef6jx)o5i@9nq5ycg2tcb1fb^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["django-todo-manager-production.up.railway.app",
+    "127.0.0.1",
+    "localhost"
+    ]
+CSRF_TRUSTED_ORIGINS = [
+    "https://django-todo-manager-production.up.railway.app"
+]
 
 
 # Application definition
