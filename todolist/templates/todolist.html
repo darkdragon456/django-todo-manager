@@ -10,6 +10,7 @@ Task List
 
 {% if messages %}
     {% for message in messages %}
+        <!-- Responsive alert spacing keeps messages readable on small screens without causing overflow -->
         <div class="alert alert-info alert-dismissible fade show" role="alert">
             {{ message }}
             <button type="button"
@@ -23,110 +24,118 @@ Task List
 
 <br>
 
-<form method="POST">
+<!-- Responsive form layout uses Bootstrap grid classes so the input and button stack cleanly on mobile -->
+<form method="POST" class="mx-auto" style="max-width: 700px;">
     {% csrf_token %}
 
-    <div class="mb-3">
-        <input type="text"
-               class="form-control"
-               name="task"
-               placeholder="New task?">
+    <div class="row g-2 align-items-stretch">
+        <div class="col-12 col-sm-8 col-md-9">
+            <input type="text"
+                   class="form-control form-control-lg"
+                   name="task"
+                   placeholder="New task?">
+        </div>
+        <div class="col-12 col-sm-4 col-md-3">
+            <button type="submit" class="btn btn-primary btn-lg w-100">
+                Add Task
+            </button>
+        </div>
     </div>
-
-    <button type="submit" class="btn btn-primary">
-        Add Task
-    </button>
 </form>
 
 <br>
 
-<div class="container">
+<!-- Responsive container and table wrapper prevent horizontal scrolling on narrow screens -->
+<div class="container px-2 px-sm-3 px-md-4 overflow-hidden">
 
-    <table class="table table-bordered">
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle mb-3">
 
-        <thead class="table-dark">
-            <tr class="row">
-                <th class="col-8" scope="col">Task Name</th>
-                <th class="col-2" scope="col">Done</th>
-                <th class="col-1" scope="col">Edit</th>
-                <th class="col-1" scope="col">Delete</th>
-            </tr>
-        </thead>
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Task Name</th>
+                    <th scope="col">Done</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
 
-        <tbody>
+            <tbody>
 
-            {% for task in all_tasks %}
+                {% for task in all_tasks %}
 
-                {% if task.is_completed %}
+                    {% if task.is_completed %}
 
-                    <tr class="table-success row">
-                        <td class="col-8">
-                            {{ forloop.counter }} | {{ task.task }}
-                        </td>
+                        <tr class="table-success">
+                            <td class="text-break">
+                                {{ forloop.counter }} | {{ task.task }}
+                            </td>
 
-                        <td class="col-2">
-                            <a href="{% url 'pending_task' task.id %}"
-                               class="btn btn-outline-dark">
-                                Mark as pending
-                            </a>
-                        </td>
+                            <td>
+                                <a href="{% url 'pending_task' task.id %}"
+                                   class="btn btn-outline-dark btn-sm w-100">
+                                    Mark as pending
+                                </a>
+                            </td>
 
-                        <td class="col-1">
-                            <a href="{% url 'edit_task' task.id %}"
-                               class="btn btn-warning">
-                                Edit
-                            </a>
-                        </td>
+                            <td>
+                                <a href="{% url 'edit_task' task.id %}"
+                                   class="btn btn-warning btn-sm w-100">
+                                    Edit
+                                </a>
+                            </td>
 
-                        <td class="col-1">
-                            <a href="{% url 'Delete_task' task.id %}"
-                               class="btn btn-outline-danger">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
+                            <td>
+                                <a href="{% url 'Delete_task' task.id %}"
+                                   class="btn btn-outline-danger btn-sm w-100">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
 
-                {% else %}
+                    {% else %}
 
-                    <tr class="row">
-                        <td class="col-8">
-                            {{ forloop.counter }} | {{ task.task }}
-                        </td>
+                        <tr>
+                            <td class="text-break">
+                                {{ forloop.counter }} | {{ task.task }}
+                            </td>
 
-                        <td class="col-2">
-                            <a href="{% url 'complete_task' task.id %}"
-                               class="btn btn-success">
-                                Mark as completed
-                            </a>
-                        </td>
+                            <td>
+                                <a href="{% url 'complete_task' task.id %}"
+                                   class="btn btn-success btn-sm w-100">
+                                    Mark as completed
+                                </a>
+                            </td>
 
-                        <td class="col-1">
-                            <a href="{% url 'edit_task' task.id %}"
-                               class="btn btn-warning">
-                                Edit
-                            </a>
-                        </td>
+                            <td>
+                                <a href="{% url 'edit_task' task.id %}"
+                                   class="btn btn-warning btn-sm w-100">
+                                    Edit
+                                </a>
+                            </td>
 
-                        <td class="col-1">
-                            <a href="{% url 'Delete_task' task.id %}"
-                               class="btn btn-outline-danger">
-                                Delete
-                            </a>
-                        </td>
-                    </tr>
+                            <td>
+                                <a href="{% url 'Delete_task' task.id %}"
+                                   class="btn btn-outline-danger btn-sm w-100">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
 
-                {% endif %}
+                    {% endif %}
 
-            {% endfor %}
+                {% endfor %}
 
-        </tbody>
+            </tbody>
 
-    </table>
+        </table>
+    </div>
 
-    <p>Total Pages = {{ all_tasks.paginator.num_pages }}</p>
+    <p class="mb-3">Total Pages = {{ all_tasks.paginator.num_pages }}</p>
 
+    <!-- Responsive pagination keeps page controls usable and aligned on mobile and desktop -->
     <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-end">
+        <ul class="pagination justify-content-center justify-content-sm-end flex-wrap">
 
             <li class="page-item">
                 <a class="page-link" href="?page=1">
