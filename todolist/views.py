@@ -16,7 +16,7 @@ def homepage(request):
     today = timezone.now().date()
     start_of_week =today-timedelta(days=today.weekday())
     week_labels =['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
-    weekly_data=[]
+    weekly_data=[7,2,4,1,6,3]
 
     # use for loop
     for i in range(7):
