@@ -4,28 +4,23 @@
     Edit Task
 {% endblock %}
 
-
-
 {% block content %}
-<div class='container'>
-    {% if  task_obj.owner == user %}
-    <form method="POST">
-    {% csrf_token %} 
-    <div class="mb-3">
-        <input type="Text" class="form-control" name="task"placeholder="{{task_obj.task}}" value="{{task_obj.task}}">
-        <input type="hidden" class="form-control" name="is_completed" value="{{task_obj.is_completed}}">
+<div class="container px-2 px-sm-3 px-md-4 py-3 py-md-4 overflow-hidden">
+    <div class="row justify-content-center">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+            {% if task_obj.owner == user %}
+            <form method="POST" class="w-100">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="Text" class="form-control" name="task" placeholder="{{ task_obj.task }}" value="{{ task_obj.task }}">
+                    <input type="hidden" class="form-control" name="is_completed" value="{{ task_obj.is_completed }}">
+                </div>
+                <button type="submit" class="btn btn-primary w-100 w-sm-auto px-4 py-2">Update Task</button>
+            </form>
+            {% else %}
+            <p class="mb-0">Access Restricted !</p>
+            {% endif %}
+        </div>
     </div>
-    
-    </div>
-    <button type="submit" class="btn btn-primary">Update Task</button>
-    </form>
-
-    <br>
-    </div>
-    {% else %}
-
-    <p> Access Restricted !</p>
-
-    {% endif %}
-
-{% endblock content%}
+</div>
+{% endblock content %}
